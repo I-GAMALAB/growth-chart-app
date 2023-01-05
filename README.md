@@ -1,5 +1,5 @@
-SMART Pediatric Growth Chart
---------------------------------------------------------------------------------
+## SMART Pediatric Growth Chart
+
 ## ⚠️ This project is deprecated and is not actively maintained!
 
 The purpose of this app is to manage and display statistical data for the
@@ -26,8 +26,7 @@ set of features:
   that time. You can also move the mouse over another point(s) and compare them
   with the current selection.
 
-Technical Information
---------------------------------------------------------------------------------
+## Technical Information
 
 How the settings are stored
 
@@ -46,8 +45,7 @@ That results in graceful degradation behavior:
   only uses the config file (and cannot write to it). Even if you change the
   settings via UI, they will be discarded after page reload.
 
-The source code structure
---------------------------------------------------------------------------------
+## The source code structure
 
 Updating the source of the app requires advanced JavaScript knowledge. However,
 if you want to do that, the best place to start would be the settings of the
@@ -77,7 +75,7 @@ The Table View is crated by the code in “smartapp/js/gc-grid-view.js”.
 The Parental View is crated by the code in “smartapp/js/gc-parental-view.js”.
 The files “smartapp/js/gc-app.js” and “smartapp/js/gc-smart-data.js” are
 responsible for creating the application and the patient(s). They are doing the
-“dirty work” and editting them is not 	recommended.
+“dirty work” and editting them is not recommended.
 
 The Charts View is controlled by instance of the ChartPane class from
 “smartapp/js/chart-pane.js”. That instance contains (and controls) some charts.
@@ -85,8 +83,7 @@ These charts are created bt the Chart classes at “smartapp/js/charts/”. They
 inherit the base class at “smartapp/js/chart/chart.js”, which actually handles
 most of the drawing tasks.
 
-Important
---------------------------------------------------------------------------------
+## Important
 
 The XDate library instance used in the app contains a custom fix related to
 the date use in windows opened by the app.
@@ -94,8 +91,7 @@ the date use in windows opened by the app.
 In the event that the library needs to be upgraded with a new version,
 this fix may need to be reapplied.
 
-System requirements
---------------------------------------------------------------------------------
+## System requirements
 
 The application should run on any operating system. The only requirements are
 about the browser that hosts it. For best performance use Google Chrome. The
@@ -107,7 +103,6 @@ following browsers should be compatible:
 - Google Chrome 24+
 - Opera 12.1+
 
-
 Also, the following browser features must be enabled:
 
 - JavaScript must be turned on
@@ -117,12 +112,18 @@ Also, the following browser features must be enabled:
 - On Windows, Internet Explorer cannot display the pages properly if the OS zoom
   is not set to 100% (Control Panel\Appearance and Personalization\Display)
 
-Deployment
------------------------------------------------------------------------------
+## Deployment
 
 From a console in the project directory, execute:
 
 ```
 npm install
 npm start
+```
+
+With Docker
+
+```
+docker build -t growth-app .
+docker run -p 9000:80 growth-app
 ```
