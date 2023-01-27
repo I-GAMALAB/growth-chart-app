@@ -4,15 +4,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Growth Chart SMART Application</title>
-    <script src="node_modules/fhirclient/build/fhir-client.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fhirclient@2.2.0/build/fhir-client.js"></script>
     <script>
       FHIR.oauth2.authorize({
-        "client_id": "growth_chart",
-        "scope":  "patient/Observation.read patient/Patient.read offline_access",
+        client_id: "a753dd75-d4d9-4d19-a521-8c1fca78e640",
+        scope:
+          "launch openid patient/Observation.read patient/Patient.read patient/FamilyMemberHistory.read offline_access",
+        redirect_uri: "http://localhost:9300",
+        iss: "http://localhost:8000",
+        //launch:
+        // "eyJhIjoiMSIsImIiOiJzbWFydC03Nzc3NzA0IiwiZSI6InNtYXJ0LVByYWN0aXRpb25lci03MjA4MDQxNiJ9",
         // "client_id": "944d96a0-4caf-4a96-813e-bc38aadb1169" // HSPC
         // "client_id": "5570f8be-6caf-4915-ae15-69545ab38e68" // Cerner
       });
     </script>
   </head>
-  <body>Loading...</body>
+  <body>
+    Loading...
+  </body>
 </html>
