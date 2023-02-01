@@ -1,0 +1,24 @@
+{
+  "name": "back-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "NODE_PATH=./src nodemon bin/www localhost 3500"
+  },
+  "dependencies": {
+    "axios": "^1.2.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "4.17.1",
+    "helmet": "^6.0.1",
+    "morgan": "^1.10.0",
+    "qs": "^6.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

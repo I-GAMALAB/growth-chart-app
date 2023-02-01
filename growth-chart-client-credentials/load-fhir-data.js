@@ -1,7 +1,7 @@
 /* global GC, $, FHIR, XDate, Promise */
 window.GC = window.GC || {};
 
-GC.get_data = function () {
+GC.get_data = function async() {
   var _client;
 
   // helper functions --------------------------------------------------------
@@ -238,8 +238,27 @@ GC.get_data = function () {
 
   // init --------------------------------------------------------------------
 
-  function onReady(client) {
-    _client = client;
+  async function onReady() {
+    let url = new URL(window.location.href);
+
+    const ppn = url.searchParams.get("ppn");
+    const state = url.searchParams.get("state");
+
+    var json = await fetch(
+      "http://localhost:3500/launch/" + state + "/fhir?ppn=" + ppn
+    );
+
+    var response = await json.json();
+
+    var $client = new FHIR.client({
+      serverUrl: "http://localhost:8000",
+      tokenResponse: {
+        access_token: response.access_token,
+        patient: response.patient_id,
+      },
+    });
+    _client = $client;
+    var client = $client;
 
     if (!client.patient || !client.patient.id) {
       throw new Error(GC.str("STR_Error_NoPatient"));
@@ -261,21 +280,7 @@ GC.get_data = function () {
     });
   }
 
-  return FHIR.oauth2
-    .ready()
-    .then(onReady)
-    .catch(function (e) {
-      if (e.status == 401) {
-        // if we have previously been authorized
-        if (_client) {
-          throw new Error(
-            "Your SMART session has expired. Please launch again."
-          );
-        }
-
-        // Never authorized
-        throw new Error("App launched without SMART context!");
-      }
-      throw e;
-    });
+  return new Promise(function (resolve, reject) {
+    resolve(onReady());
+  });
 };

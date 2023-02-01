@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+const envvars = require("envvars");
+envvars.check();
+
+const { createServer } = require("http");
+const app = require("app");
+
+(async () => {
+  console.log("> environment : " + process.env.NODE_ENV);
+  const server = createServer(app);
+  const port = process.env.PORT || 3000;
+
+  server.listen(port, () => {
+    console.log("> listening...");
+  });
+})();
